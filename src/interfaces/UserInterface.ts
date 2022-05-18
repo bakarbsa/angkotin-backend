@@ -9,6 +9,11 @@ export interface LocationInterface {
   longitude: number,
 };
 
+export interface DriverMetaInterface {
+  angkotNumber: string,
+  isActive: boolean,
+};
+
 export interface UserInterface {
   id: String,
   createdAt: Date,
@@ -18,8 +23,9 @@ export interface UserInterface {
   email: String,
   phoneNumber: String,
   password: String,
-  location: LocationInterface
-}
+  location: LocationInterface,
+  driverMeta?: DriverMetaInterface
+};
 
 export default class User implements UserInterface {
   public id: String;
@@ -31,6 +37,7 @@ export default class User implements UserInterface {
   public phoneNumber: String;
   public password: String;
   public location: LocationInterface;
+  public driverMeta?: DriverMetaInterface;
 
   constructor(user: UserInterface) {
     this.id = user.id,
@@ -41,6 +48,7 @@ export default class User implements UserInterface {
     this.email = user.email,
     this.phoneNumber = user.phoneNumber,
     this.password = user.password,
-    this.location = user.location
+    this.location = user.location,
+    this.driverMeta = user.driverMeta
   };
-}
+};

@@ -1,6 +1,6 @@
 export interface APIResponse<T = string> {
   success: boolean,
   data?: T,
-  message: string,
+  message?: string,
   error?: any,
 };
