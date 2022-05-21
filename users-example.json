@@ -1,0 +1,89 @@
+[
+  {
+    "createdAt": "2013-10-21T13:28:06.419Z",
+    "role": "driver",
+    "username": "ari123",
+    "name": "Dwi Ari",
+    "email": "ari@gmail.com",
+    "phoneNumber": "0812345678",
+    "password": "ari1234",
+    "location": {
+      "latitude": "38.8951",
+      "longitude": "-77.0364"
+    },
+    "driverMeta": {
+      "angkotNumber": "N23455LG",
+      "isActive": false
+    }
+  },
+
+  {
+    "createdAt": "2013-10-21T13:28:06.419Z",
+    "role": "passanger",
+    "username": "bakar123",
+    "name": "Abu Bakar",
+    "email": "bakar@gmail.com",
+    "phoneNumber": "08145678",
+    "password": "bakar1234",
+    "location": {
+      "latitude": "38.8951",
+      "longitude": "-77.0364"
+    }
+  },
+
+  {
+    "createdAt": "2013-10-21T13:28:06.419Z",
+    "role": "admin",
+    "name": "Anggita",
+    "phoneNumber": "08234567",
+    "password": "tata123",
+    "location": {
+      "latitude": "38.8951",
+      "longitude": "-77.0364"
+    }
+  },
+
+  {
+    "createdAt": "2013-10-21T13:28:06.419Z",
+    "role": "driver",
+    "name": "Ayudhia",
+    "phoneNumber": "08567890",
+    "password": "ayudhia123",
+    "location": {
+      "latitude": "38.8951",
+      "longitude": "-77.0364"
+    },
+    "driverMeta": {
+      "angkotNumber": "N45678HG",
+      "isActive": false
+    }  
+  },
+
+  {
+    "createdAt": "2013-10-21T13:28:06.419Z",
+    "role": "passanger",
+    "name": "Gagah Putra",
+    "phoneNumber": "089876544",
+    "password": "gagah1234",
+    "location": {
+      "latitude": "38.8951",
+      "longitude": "-77.0364"
+    }
+  },
+
+  {
+    "createdAt": "2013-10-21T13:28:06.419Z",
+    "role": "passanger",
+    "name": "Fadilah",
+    "phoneNumber": "089857234",
+    "password": "fadilah1234",
+    "location": {
+      "latitude": "38.8951",
+      "longitude": "-77.0364"
+    },
+    "driverMeta": {
+      "angkotNumber": "N93749LL",
+      "isActive": false
+    }  
+  }
+]
