@@ -1,5 +1,5 @@
 export enum UserRole {
-  Passanger = 'passanger',
+  Passenger = 'passenger',
   Driver = 'driver',
   Admin = 'admin',
 };
@@ -15,40 +15,13 @@ export interface DriverMetaInterface {
 };
 
 export interface UserInterface {
-  id: String,
+  id?: string,
   createdAt: Date,
   role: UserRole,
-  username: String,
-  name: String,
-  email: String,
-  phoneNumber: String,
-  password: String,
+  nik: string,
+  name: string,
+  phoneNumber: string,
+  password: string,
   location: LocationInterface,
   driverMeta?: DriverMetaInterface
-};
-
-export default class User implements UserInterface {
-  public id: String;
-  public createdAt: Date;
-  public role: UserRole;
-  public username: String;
-  public name: String;
-  public email: String;
-  public phoneNumber: String;
-  public password: String;
-  public location: LocationInterface;
-  public driverMeta?: DriverMetaInterface;
-
-  constructor(user: UserInterface) {
-    this.id = user.id,
-    this.createdAt = user.createdAt,
-    this.role = user.role,
-    this.username = user.username,
-    this.name = user.name,
-    this.email = user.email,
-    this.phoneNumber = user.phoneNumber,
-    this.password = user.password,
-    this.location = user.location,
-    this.driverMeta = user.driverMeta
-  };
 };
