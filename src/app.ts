@@ -18,8 +18,9 @@ app.use(json());
 app.post('/auth', AuthController);
 
 app.use('/register', registerRouter);
-app.use('/passenger', Authentication, IsPassenger, passengerRouter);
-app.use('/driver', Authentication, IsDriver, driverRouter);
-app.use('/admin', Authentication, IsAdmin, adminRouter);
+
+app.use('/passengers', Authentication, IsPassenger, passengerRouter);
+app.use('/drivers', Authentication, IsDriver, driverRouter);
+app.use('/admins', Authentication, IsAdmin, adminRouter);
 
 export default app;

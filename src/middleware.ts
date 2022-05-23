@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 import JWT from 'jsonwebtoken';
 import fs from 'fs';
@@ -7,8 +6,6 @@ import db from './services/db';
 import { doc, getDoc } from 'firebase/firestore';
 import { UserInterface, UserRole } from './interfaces/UserInterface';
 import { APIResponse } from './interfaces/Response';
-
-dotenv.config();
 
 const unauthorizedResponse = <APIResponse> {
   success: false,
@@ -20,20 +17,18 @@ export async function Authentication(req: Request, res: Response, next: NextFunc
   const token = authorization?.substring(7);
 
   if (!token) {
-    res.json(unauthorizedResponse);
+    res.status(401).json(unauthorizedResponse);
     return;
   }
 
   try {
-    const id = JWT.verify(token, fs.readFileSync(path.join(__dirname, '../../private.key')), <JWT.VerifyOptions> {
-      algorithms: ['PS256']
-    });
+    const id = JWT.verify(token, fs.readFileSync(path.join(__dirname, '../private.key')));
 
     const userRef = doc(db, 'users', id as string);
     const userSnap = await getDoc(userRef);
 
     if (!userSnap.exists) {
-      res.json(unauthorizedResponse);
+      res.status(401).json(unauthorizedResponse);
       return;
     }
 
@@ -46,14 +41,18 @@ export async function Authentication(req: Request, res: Response, next: NextFunc
     next();
 
   } catch (err) {
-    res.json(unauthorizedResponse);
+    res.json(<APIResponse> {
+      success: false,
+      error: (err as Error).message
+    });
+    return;
   }
 }
 
 export function IsAdmin({res, next}: {res: Response, next: NextFunction}): void {
   const { user } = res.locals;
     
-  if (user.UserRole !== UserRole.Admin) {
+  if (user.role !== UserRole.Admin) {
     res.json(<APIResponse>{
       success: false,
       message: 'Only for admin'
@@ -68,7 +67,7 @@ export function IsAdmin({res, next}: {res: Response, next: NextFunction}): void 
 export function IsPassenger({res, next}: {res: Response, next: NextFunction}): void {
   const { user } = res.locals;
 
-  if (user.UserRole != UserRole.Passenger) {
+  if (user.role != UserRole.Passenger) {
     res.json(<APIResponse>{
       success: false,
       message: 'Only for passenger'
@@ -83,7 +82,7 @@ export function IsPassenger({res, next}: {res: Response, next: NextFunction}): v
 export function IsDriver({res, next}: {res: Response, next: NextFunction}): void {
   const { user } = res.locals;
 
-  if (user.UserRole != UserRole.Driver) {
+  if (user.role != UserRole.Driver) {
     res.json(<APIResponse>{
       success: false,
       message: 'Only for driver'

@@ -23,7 +23,7 @@ export async function AuthController(req: Request, res: Response) {
   const userQuery = await getDocs(q);
 
   if (userQuery.empty) {
-    res.json(accountInvalid);
+    res.status(404).json(accountInvalid);
     return;
   }
 
@@ -34,21 +34,19 @@ export async function AuthController(req: Request, res: Response) {
 
   const passwordMatch = await BCrypt.compare(password, user.password);
   if (!passwordMatch) {
-    res.json(accountInvalid);
+    res.status(404).json(accountInvalid);
     return;
   }
 
-  const jwt = JWT.sign(String(user.id), fs.readFileSync(path.join(__dirname, '../../private.key')), <JWT.SignOptions> {
-    algorithm: 'PS256'
-  });
+  const jwt = JWT.sign(String(user.id), fs.readFileSync(path.join(__dirname, '../../private.key')));
 
   let endPoint = '/';
   if (user.role == UserRole.Admin) {
-    endPoint = '/admin';
+    endPoint = '/admins';
   } else if (user.role == UserRole.Driver) {
-    endPoint = '/driver';
+    endPoint = '/drivers';
   } else if (user.role == UserRole.Passenger) {
-    endPoint = '/passenger';
+    endPoint = '/passengers';
   }
 
   interface ResponInterface {
@@ -56,7 +54,7 @@ export async function AuthController(req: Request, res: Response) {
     endPoint: string
   }
 
-  res.json(<APIResponse<ResponInterface>> {
+  res.status(200).json(<APIResponse<ResponInterface>> {
     success: true,
     data: {
       token: jwt,

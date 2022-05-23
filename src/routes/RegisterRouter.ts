@@ -1,9 +1,10 @@
 import express from 'express';
-import { addDriver, addPassenger } from '../controllers/UserController';
+import { addAdmin, addDriver, addPassenger } from '../controllers/UserController';
 
 const registerRouter = express.Router();
 
-registerRouter.post('/passenger', addPassenger);
-registerRouter.post('/driver', addDriver);
+registerRouter.post('/passengers', addPassenger);
+registerRouter.post('/drivers', addDriver);
+registerRouter.post('/admins', addAdmin);
 
 export default registerRouter;
