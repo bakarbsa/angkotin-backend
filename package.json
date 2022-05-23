@@ -4,7 +4,7 @@
   "description": "Bangkit capstone project",
   "main": "lib/server.js",
   "scripts": {
-    "start": "npx nodemon ./src/server.ts"
+    "start": "ts-node ./src/server.ts"
   },
   "author": "",
   "license": "MIT",
