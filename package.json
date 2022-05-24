@@ -12,7 +12,7 @@
     "watch": "tsc --watch",
     "serve": "node dist/server.js",
     "test": "jest",
-    "deploy": "git add . && git commit -m Heroku && git push heroku master"
+    "deploy": "git add . && git commit -m Heroku && git push heroku main"
   },
   "author": "",
   "license": "MIT",

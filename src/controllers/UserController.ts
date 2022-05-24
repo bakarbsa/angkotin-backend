@@ -134,7 +134,7 @@ export async function addPassenger(req: Request, res: Response) {
     });
     return;
   }).catch(err => {
-    res.status(201).json(<APIResponse> {
+    res.status(500).json(<APIResponse> {
       success: false,
       error: err
     })
