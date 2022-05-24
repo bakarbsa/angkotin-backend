@@ -72,7 +72,6 @@ export async function getPassengerById(req: Request, res: Response) {
 };
 
 export async function addPassenger(req: Request, res: Response) {
-  res.setHeader('content-type', 'text/plain');
   const { 
     name, 
     nik, 
