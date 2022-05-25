@@ -82,7 +82,7 @@ export async function addPassenger(req: Request, res: Response) {
   } = req.body;
   
   if (!nik || !phoneNumber) {
-    res.status(404).json(<APIResponse> {
+    res.status(417).json(<APIResponse> {
       success: false,
       message: `NIK or phone cannot be empty ${name} ${nik}, ${phoneNumber}`
     });
@@ -98,14 +98,14 @@ export async function addPassenger(req: Request, res: Response) {
   const nikFound= await getDocs(nikQuery);
 
   if (!phoneNumberFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'Phone number has been used'
     });
     return;
   }
   if (!nikFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'NIK has been used'
     });
@@ -282,7 +282,7 @@ export async function addDriver(req: Request, res: Response) {
   } = req.body;
 
   if (!nik || !phoneNumber || !angkotNumber) {
-    res.status(404).json(<APIResponse> {
+    res.status(417).json(<APIResponse> {
       success: false,
       message: 'NIK, phone, or angkot number cannot be empty'
     });
@@ -300,21 +300,21 @@ export async function addDriver(req: Request, res: Response) {
   const angkotNumberFound = await getDocs(angkotNumberQuery);
 
   if (!phoneNumberFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'Phone number has been used'
     });
     return;
   }
   if (!nikFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'NIK has been used'
     });
     return;
   }
   if (!angkotNumberFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'Angkot number has been used'
     });
@@ -413,7 +413,7 @@ export async function addAdmin(req: Request, res: Response) {
   } = req.body;
 
   if (!nik || !phoneNumber) {
-    res.status(404).json(<APIResponse> {
+    res.status(417).json(<APIResponse> {
       success: false,
       message: 'NIK or phone cannot be empty'
     });
@@ -429,14 +429,14 @@ export async function addAdmin(req: Request, res: Response) {
   const nikFound= await getDocs(nikQuery);
 
   if (!phoneNumberFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'Phone number has been used'
     });
     return;
   }
   if (!nikFound.empty) {
-    res.status(404).json(<APIResponse>{
+    res.status(406).json(<APIResponse>{
       success: false,
       message: 'NIK has been used'
     });
