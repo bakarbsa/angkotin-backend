@@ -84,7 +84,7 @@ export async function addPassenger(req: Request, res: Response) {
   if (!nik || !phoneNumber) {
     res.status(417).json(<APIResponse> {
       success: false,
-      message: `NIK or phone cannot be empty ${name} ${nik}, ${phoneNumber}`
+      message: `NIK or phone cannot be empty`
     });
     return;
   }
