@@ -161,20 +161,23 @@ export async function updatePassenger(req: Request, res: Response) {
       id: userSnap.id,
       ...userSnap.data()
     } as UserInterface;
-
-    if (!phoneNumber.empty) {
+    
+    if (phoneNumber) {
+      console.log(phoneNumber);
+      
       user.phoneNumber = phoneNumber;
+      
     }
-    if (!name.empty) {
+    if (name) {
       user.name = name;
     }
-    if (!password.empty) {
+    if (password) {
       user.password = BCrypt.hashSync(password, 10);
     }
 
     await updateDoc(docRef, {...user}).then(() => {
       res.status(200).json(<APIResponse> {
-        success: false,
+        success: true,
         message: 'Passenger updated successful'
       })
       return;
