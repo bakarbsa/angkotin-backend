@@ -4,7 +4,7 @@
   "description": "Bangkit capstone project",
   "main": "lib/server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "npx nodemon src/server.ts",
     "postinstall": "tsc",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",

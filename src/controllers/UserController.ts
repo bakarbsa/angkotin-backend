@@ -144,7 +144,7 @@ export async function addPassenger(req: Request, res: Response) {
 
 export async function updatePassenger(req: Request, res: Response) {
   const { id } = req.params;
-  const { name, phoneNumber, password } = req.body;
+  const { name, phoneNumber, password, longitude, latitude } = req.body;
 
   const docRef = doc(db, 'users', id);
   
@@ -162,6 +162,14 @@ export async function updatePassenger(req: Request, res: Response) {
       ...userSnap.data()
     } as UserInterface;
     
+    if (user.role != UserRole.Passenger) {
+      res.status(417).json(<APIResponse> {
+        success: false,
+        message: 'Only can update driver'
+      });
+      return;
+    }
+
     if (phoneNumber) {
       console.log(phoneNumber);
       
@@ -174,6 +182,13 @@ export async function updatePassenger(req: Request, res: Response) {
     if (password) {
       user.password = BCrypt.hashSync(password, 10);
     }
+    if (longitude) {
+      user.location.longitude = longitude;
+    }
+    if (latitude) {
+      user.location.latitude = latitude;
+    }
+    
 
     await updateDoc(docRef, {...user}).then(() => {
       res.status(200).json(<APIResponse> {
@@ -359,7 +374,70 @@ export async function addDriver(req: Request, res: Response) {
 }
 
 export async function updateDriver(req: Request, res: Response) {
+  const { id } = req.params;
+  const { name, phoneNumber, password, longitude, latitude } = req.body;
 
+  const docRef = doc(db, 'users', id);
+  
+  await getDoc(docRef).then(async userSnap => {
+    if(!userSnap.exists()) {
+      res.status(404).json(<APIResponse> {
+        success: false,
+        message: 'Driver not found'
+      });
+      return;
+    }
+
+    const user = {
+      id: userSnap.id,
+      ...userSnap.data()
+    } as UserInterface;
+    
+    if (user.role != UserRole.Driver) {
+      res.status(417).json(<APIResponse> {
+        success: false,
+        message: 'Only can update driver'
+      });
+      return;
+    }
+
+    if (phoneNumber) {
+      user.phoneNumber = phoneNumber;
+    }
+    if (name) {
+      user.name = name;
+    }
+    if (password) {
+      user.password = BCrypt.hashSync(password, 10);
+    }
+    if (longitude) {
+      user.location.longitude = longitude;
+    }
+    if (latitude) {
+      user.location.latitude = latitude;
+    }
+    
+
+    await updateDoc(docRef, {...user}).then(() => {
+      res.status(200).json(<APIResponse> {
+        success: true,
+        message: 'Passenger updated successful'
+      })
+      return;
+    }).catch(err => {
+      res.status(500).json(<APIResponse> {
+        success: false,
+        error: (err as Error).message
+      });
+    });
+    return;
+  }).catch(err => {
+    res.status(500).json(<APIResponse> {
+      success: false,
+      error: (err as Error).message
+    });
+    return;
+  });
 };
 
 export async function removeDriver(req: Request, res: Response) {
