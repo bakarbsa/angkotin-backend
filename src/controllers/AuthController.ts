@@ -58,6 +58,7 @@ export async function AuthController(req: Request, res: Response) {
     success: true,
     data: {
       token: jwt,
+      id: user.id,
       endPoint: endPoint
     }
   });
