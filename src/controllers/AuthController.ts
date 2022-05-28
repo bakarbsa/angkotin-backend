@@ -62,4 +62,5 @@ export async function AuthController(req: Request, res: Response) {
       endPoint: endPoint
     }
   });
+  return;
 };
