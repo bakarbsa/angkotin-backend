@@ -81,7 +81,7 @@ export async function addPassenger(req: Request, res: Response) {
     longitude 
   } = req.body;
   
-  if (!nik || !phoneNumber) {
+  if (!nik || !phoneNumber || !name || !password) {
     res.status(417).json(<APIResponse> {
       success: false,
       message: `NIK or phone cannot be empty`
@@ -300,7 +300,7 @@ export async function addDriver(req: Request, res: Response) {
     isActive 
   } = req.body;
 
-  if (!nik || !phoneNumber || !angkotNumber || !angkotLabel) {
+  if (!nik || !phoneNumber || !password || !name || !angkotNumber || !angkotLabel) {
     res.status(417).json(<APIResponse> {
       success: false,
       message: 'NIK, phone, angkot number, and angkot label cannot be empty'
@@ -529,7 +529,7 @@ export async function addAdmin(req: Request, res: Response) {
   const hashedPass = BCrypt.hashSync(password, 10);
 
   const user: UserInterface = {
-    name: name as string,
+    name: name ? name as string : "admin",
     nik: nik as string,
     phoneNumber: phoneNumber as string,
     password: hashedPass as string,
@@ -548,7 +548,7 @@ export async function addAdmin(req: Request, res: Response) {
     });
     return;
   }).catch(err => {
-    res.status(201).json(<APIResponse> {
+    res.status(500).json(<APIResponse> {
       success: false,
       error: err
     })
