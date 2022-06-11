@@ -296,13 +296,14 @@ export async function addDriver(req: Request, res: Response) {
     latitude, 
     longitude,
     angkotNumber,
+    angkotLabel,
     isActive 
   } = req.body;
 
-  if (!nik || !phoneNumber || !angkotNumber) {
+  if (!nik || !phoneNumber || !angkotNumber || !angkotLabel) {
     res.status(417).json(<APIResponse> {
       success: false,
-      message: 'NIK, phone, or angkot number cannot be empty'
+      message: 'NIK, phone, angkot number, and angkot label cannot be empty'
     });
     return;
   }
@@ -354,6 +355,7 @@ export async function addDriver(req: Request, res: Response) {
     role: UserRole.Driver,
     driverMeta: {
       angkotNumber: angkotNumber as string,
+      angkotLabel: angkotLabel,
       isActive: isActive ? isActive as boolean : false
     }
   };

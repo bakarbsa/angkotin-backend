@@ -11,6 +11,7 @@ export interface LocationInterface {
 
 export interface DriverMetaInterface {
   angkotNumber: string,
+  angkotLabel: String,
   isActive: boolean,
 };
 
