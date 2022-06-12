@@ -7,6 +7,7 @@ import passengerRouter from './routes/PassengerRouter';
 import driverRouter from './routes/DriverRouter';
 import adminRouter from './routes/AdminRouter';
 import registerRouter from './routes/RegisterRouter';
+import predictionRouter from './routes/PredicitionRouter';
 
 dotenv.config();
 
@@ -22,5 +23,6 @@ app.use('/register', registerRouter);
 app.use('/passengers', Authentication, IsPassenger, passengerRouter);
 app.use('/drivers', Authentication, IsDriver, driverRouter);
 app.use('/admins', Authentication, IsAdmin, adminRouter);
+app.use('/prediction', predictionRouter);
 
 export default app;
