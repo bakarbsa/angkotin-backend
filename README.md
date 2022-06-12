@@ -44,7 +44,7 @@ Authentication (Login)
 Register
 - Method : POST
 - Endpoint (passanger)  : ```/register/passengers```
-- Endpoint (driver) : ```/register/drivers```
+- Endpoint (driver) : ```/register/drivers``` (Driver must register angkotNumber and angkotLabel)
 - Endpoint (admin) : ```/register/admins```
 - Body : 
   ```json
