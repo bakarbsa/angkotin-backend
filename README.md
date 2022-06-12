@@ -32,7 +32,7 @@ Authentication (Login)
 - Response :
   ```json
   {
-    "success": boolean,
+    "success": true,
     "data": {
       "token": "user token",
       "id": "user id",
@@ -58,9 +58,9 @@ Register
 - Response :
     ```json
     {
-      "success": boolean,
+      "success": true,
       "data": {
-        user data
+        "user data"
       }
     }
     ```
